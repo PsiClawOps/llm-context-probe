@@ -8,25 +8,14 @@ Active context window probing for LLM providers. Binary-searches real API endpoi
 
 ### github-copilot
 
-**Probe results** — actual enforced limits, measured at the endpoint:
+| Model | Limit | Out | Vis | Tools | Rsn | Method | P50 | Probed |
+|---|---|---|---|---|---|---|---|---|
+| `gpt-5.4` | 194K | 128K | ✅ | ✅ | ✅ | binary-search | 9,842ms | 2026-04-03 |
+| `gpt-4o` | 64K | 16K | ✅ | ❌ | ❌ | error-message | — | 2026-04-03 |
+| `claude-opus-4-6` | ~126K | 64K | ✅ | ✅ | ❌ | binary-search | — | 2026-04-03 |
+| `claude-sonnet-4-6` | 128K | 64K | ✅ | ✅ | ❌ | error-message | 11,411ms | 2026-04-03 |
 
-| Model | Enforced Limit | Method | Requests | P50 Latency | P95 Latency | Last Probed |
-|---|---|---|---|---|---|---|
-| `gpt-5.4` | 194K | binary-search | 15 | 9,842ms | 24,091ms | 2026-04-03 |
-| `gpt-4o` | 64K | error-message | 5 | — | — | 2026-04-03 |
-| `claude-opus-4-6` | ~126K | binary-search | 12 | — | — | 2026-04-03 |
-| `claude-sonnet-4-6` | 128K | error-message | 6 | 11,411ms | 26,449ms | 2026-04-03 |
-
-*Enforced Limit = actual limit at the endpoint, not the vendor-documented native value. Latency = raw API round-trip at near-limit context sizes; inter-probe delays excluded. `—` = not recorded this run.*
-
-**Capabilities** — sourced from vendor docs:
-
-| Model | Max Output | Vision | Audio | Video | Tools | Reasoning |
-|---|---|---|---|---|---|---|
-| `gpt-5.4` | 128K | ✅ | ❌ | ❌ | ✅ | ✅ |
-| `gpt-4o` | 16K | ✅ | ❌ | ❌ | ❌ | ❌ |
-| `claude-opus-4-6` | 64K | ✅ | ❌ | ❌ | ✅ | ❌ |
-| `claude-sonnet-4-6` | 64K | ✅ | ❌ | ❌ | ✅ | ❌ |
+*Limit = actual enforced at endpoint (not vendor-documented). Out/Vis/Tools/Rsn from vendor docs. P50 = raw API round-trip at near-limit context sizes; `—` = not recorded this run.*
 
 **Pattern:** The GitHub Copilot proxy consistently enforces ~50–64% of the model's native context window. GPT-4o and claude-sonnet return the exact limit in their 400 error messages; gpt-5.4 and claude-opus required full binary search (the error message didn't include a number).
 
