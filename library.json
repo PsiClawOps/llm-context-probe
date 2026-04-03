@@ -1,8 +1,9 @@
 {
   "_meta": {
     "source": "https://github.com/taylorwilsdon/llm-context-limits",
+    "sourceBackfilledFrom": "2026-04-03",
     "updated": "2026-04-03",
-    "note": "Static reference table. probe-model-windows.mjs overlays live probe data on top of these values."
+    "note": "Static reference table (Max Output, modality, tooling, reasoning columns sourced from taylorwilsdon/llm-context-limits as of 2026-04-03). probe-model-windows.mjs overlays live probe data on top of these values."
   },
   "models": [
     {
