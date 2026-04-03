@@ -1,0 +1,50 @@
+[
+  {
+    "provider": "github-copilot",
+    "model": "gpt-5.4",
+    "probedLimit": 193812,
+    "vendorLimit": 400000,
+    "delta": -206188,
+    "pct": 48,
+    "method": "binary-search",
+    "probeCount": 15,
+    "probedAt": "2026-04-03",
+    "note": "binary search converged ≤194K; vendor native is 400K — proxy enforces ~48% of native"
+  },
+  {
+    "provider": "github-copilot",
+    "model": "gpt-4o",
+    "probedLimit": 64000,
+    "vendorLimit": 128000,
+    "delta": -64000,
+    "pct": 50,
+    "method": "error-message",
+    "probeCount": 5,
+    "probedAt": "2026-04-03",
+    "note": "exact limit returned in 400 error message; vendor native is 128K — proxy enforces exactly 50%"
+  },
+  {
+    "provider": "github-copilot",
+    "model": "claude-opus-4-6",
+    "probedLimit": 126171,
+    "vendorLimit": 200000,
+    "delta": -73829,
+    "pct": 63,
+    "method": "binary-search",
+    "probeCount": 12,
+    "probedAt": "2026-04-03",
+    "note": "binary search converged ≤127K; vendor native is 200K (1M with beta header) — proxy enforces ~63% of native"
+  },
+  {
+    "provider": "github-copilot",
+    "model": "claude-sonnet-4-6",
+    "probedLimit": 128000,
+    "vendorLimit": 200000,
+    "delta": -72000,
+    "pct": 64,
+    "method": "error-message",
+    "probeCount": 6,
+    "probedAt": "2026-04-03",
+    "note": "exact limit returned in 400 error message; vendor native is 200K (1M with beta header) — proxy enforces exactly 128K"
+  }
+]

@@ -1,0 +1,8 @@
+node_modules/
+.env
+auth-profiles.json
+*.local
+
+# Internal provider — not for public results
+results/copilot-local.json
+results/copilot-local*.json

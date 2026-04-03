@@ -1,0 +1,835 @@
+{
+  "_meta": {
+    "source": "https://github.com/taylorwilsdon/llm-context-limits",
+    "updated": "2026-04-03",
+    "note": "Static reference table. probe-model-windows.mjs overlays live probe data on top of these values."
+  },
+  "models": [
+    {
+      "family": "openai",
+      "id": "gpt-5.2-pro",
+      "aliases": [],
+      "contextWindow": 400000,
+      "maxOutputTokens": 128000,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": true,
+      "reasoning": true,
+      "notes": "GPT-5.2 Pro — smarter/more precise responses"
+    },
+    {
+      "family": "openai",
+      "id": "gpt-5.2",
+      "aliases": [
+        "gpt-5.2-codex"
+      ],
+      "contextWindow": 400000,
+      "maxOutputTokens": 128000,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": true,
+      "reasoning": true,
+      "notes": "Best for coding and agentic tasks"
+    },
+    {
+      "family": "openai",
+      "id": "gpt-5.1",
+      "aliases": [],
+      "contextWindow": 400000,
+      "maxOutputTokens": 128000,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": true,
+      "reasoning": true,
+      "notes": "Configurable reasoning effort"
+    },
+    {
+      "family": "openai",
+      "id": "gpt-5.1-codex-max",
+      "aliases": [],
+      "contextWindow": 400000,
+      "maxOutputTokens": 128000,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": true,
+      "notes": "Long-horizon agentic coding"
+    },
+    {
+      "family": "openai",
+      "id": "gpt-5.1-codex",
+      "aliases": [],
+      "contextWindow": 400000,
+      "maxOutputTokens": 128000,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": true,
+      "notes": "GPT-5.1 optimized for Codex"
+    },
+    {
+      "family": "openai",
+      "id": "gpt-5.3-codex",
+      "aliases": [],
+      "contextWindow": 400000,
+      "maxOutputTokens": 128000,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": true,
+      "notes": "GPT-5 optimized for Codex"
+    },
+    {
+      "family": "openai",
+      "id": "gpt-5.4",
+      "aliases": [
+        "gpt-5"
+      ],
+      "contextWindow": 400000,
+      "maxOutputTokens": 128000,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": true,
+      "reasoning": true,
+      "notes": "Previous reasoning model for coding/agentic",
+      "probed": {
+        "limit": 193812,
+        "method": "binary-search",
+        "date": "2026-04-03",
+        "note": "binary search converged: ≤194K, last success 194K"
+      }
+    },
+    {
+      "family": "openai",
+      "id": "gpt-5.4-mini",
+      "aliases": [
+        "gpt-5-mini"
+      ],
+      "contextWindow": 400000,
+      "maxOutputTokens": 128000,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": true,
+      "reasoning": true,
+      "notes": "Faster, cost-efficient GPT-5 variant"
+    },
+    {
+      "family": "openai",
+      "id": "gpt-5-nano",
+      "aliases": [],
+      "contextWindow": 400000,
+      "maxOutputTokens": 128000,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": true,
+      "reasoning": true,
+      "notes": "Fastest, most cost-efficient GPT-5 variant"
+    },
+    {
+      "family": "openai",
+      "id": "gpt-4.1",
+      "aliases": [
+        "gpt-4.1-2025-04-14"
+      ],
+      "contextWindow": 1047576,
+      "maxOutputTokens": 32768,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": true,
+      "reasoning": false,
+      "notes": "Smartest non-reasoning model"
+    },
+    {
+      "family": "openai",
+      "id": "gpt-4.1-mini",
+      "aliases": [],
+      "contextWindow": 1047576,
+      "maxOutputTokens": 32768,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": false,
+      "notes": "Smaller, faster GPT-4.1"
+    },
+    {
+      "family": "openai",
+      "id": "gpt-4.1-nano",
+      "aliases": [],
+      "contextWindow": 1047576,
+      "maxOutputTokens": 32768,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": false,
+      "notes": "Fastest, most cost-efficient GPT-4.1"
+    },
+    {
+      "family": "openai",
+      "id": "gpt-4o",
+      "aliases": [
+        "gpt-4o-2024-11-20",
+        "gpt-4o-2024-08-06",
+        "gpt-4o-2024-05-13"
+      ],
+      "contextWindow": 128000,
+      "maxOutputTokens": 16384,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": false,
+      "notes": "Omni-modal predecessor to GPT-5",
+      "probed": {
+        "limit": 64000,
+        "method": "error-message",
+        "date": "2026-04-03",
+        "note": "exact limit from error response"
+      }
+    },
+    {
+      "family": "openai",
+      "id": "gpt-4o-mini",
+      "aliases": [
+        "gpt-4o-mini-2024-07-18"
+      ],
+      "contextWindow": 128000,
+      "maxOutputTokens": 16384,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": false,
+      "notes": "Fast, affordable small model"
+    },
+    {
+      "family": "openai",
+      "id": "gpt-4",
+      "aliases": [
+        "gpt-4-0613"
+      ],
+      "contextWindow": 8192,
+      "maxOutputTokens": 8192,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": false,
+      "notes": "Older base GPT-4 (text-only)"
+    },
+    {
+      "family": "openai",
+      "id": "gpt-4-turbo",
+      "aliases": [
+        "gpt-4-0125-preview",
+        "gpt-4-o-preview"
+      ],
+      "contextWindow": 128000,
+      "maxOutputTokens": 4096,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": false,
+      "notes": "Older high-intelligence GPT, supports images"
+    },
+    {
+      "family": "openai",
+      "id": "gpt-3.5-turbo",
+      "aliases": [
+        "gpt-3.5-turbo-0613"
+      ],
+      "contextWindow": 16385,
+      "maxOutputTokens": 4096,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": false,
+      "notes": "Legacy model"
+    },
+    {
+      "family": "openai",
+      "id": "o1",
+      "aliases": [],
+      "contextWindow": 200000,
+      "maxOutputTokens": 100000,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": true,
+      "notes": "Previous full o-series reasoning model"
+    },
+    {
+      "family": "openai",
+      "id": "o1-mini",
+      "aliases": [],
+      "contextWindow": 128000,
+      "maxOutputTokens": 65536,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": true,
+      "notes": "Small o1 alternative (Deprecated)"
+    },
+    {
+      "family": "openai",
+      "id": "o1-preview",
+      "aliases": [],
+      "contextWindow": 128000,
+      "maxOutputTokens": 32768,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": true,
+      "notes": "Preview o-series model (Deprecated)"
+    },
+    {
+      "family": "openai",
+      "id": "o1-pro",
+      "aliases": [],
+      "contextWindow": 200000,
+      "maxOutputTokens": 100000,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": true,
+      "notes": "o1 with more compute"
+    },
+    {
+      "family": "openai",
+      "id": "o3",
+      "aliases": [],
+      "contextWindow": 200000,
+      "maxOutputTokens": 100000,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": true,
+      "notes": "Reasoning model, succeeded by GPT-5"
+    },
+    {
+      "family": "openai",
+      "id": "o3-mini",
+      "aliases": [],
+      "contextWindow": 200000,
+      "maxOutputTokens": 100000,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": true,
+      "notes": "Small o3 alternative"
+    },
+    {
+      "family": "openai",
+      "id": "o4-mini",
+      "aliases": [],
+      "contextWindow": 200000,
+      "maxOutputTokens": 100000,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": true,
+      "notes": "Fast reasoning, succeeded by GPT-5 mini"
+    },
+    {
+      "family": "anthropic",
+      "id": "claude-opus-4-6",
+      "aliases": [
+        "claude-opus-4.6",
+        "claude-opus-4.5"
+      ],
+      "contextWindow": 200000,
+      "maxOutputTokens": 64000,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": true,
+      "reasoning": false,
+      "notes": "1M ctx available via anthropic-beta: context-1m-2025-08-07",
+      "betaHeaders": {
+        "context-1m-2025-08-07": 1000000
+      },
+      "probed": {
+        "limit": 126171,
+        "method": "binary-search",
+        "date": "2026-04-03",
+        "note": "binary search converged: ≤127K, last success 126K"
+      }
+    },
+    {
+      "family": "anthropic",
+      "id": "claude-sonnet-4-6",
+      "aliases": [
+        "claude-sonnet-4.6",
+        "claude-sonnet-4.5",
+        "claude-sonnet-4"
+      ],
+      "contextWindow": 200000,
+      "maxOutputTokens": 64000,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": true,
+      "reasoning": false,
+      "notes": "1M ctx available via anthropic-beta: context-1m-2025-08-07",
+      "betaHeaders": {
+        "context-1m-2025-08-07": 1000000
+      },
+      "probed": {
+        "limit": 128000,
+        "method": "error-message",
+        "date": "2026-04-03",
+        "note": "exact limit from error response"
+      }
+    },
+    {
+      "family": "anthropic",
+      "id": "claude-3-7-sonnet",
+      "aliases": [],
+      "contextWindow": 200000,
+      "maxOutputTokens": 8000,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": true,
+      "reasoning": false,
+      "notes": "128k output via output-128k-2025-02-19 header"
+    },
+    {
+      "family": "anthropic",
+      "id": "claude-3-5-sonnet",
+      "aliases": [
+        "claude-3-5-sonnet-20241022"
+      ],
+      "contextWindow": 200000,
+      "maxOutputTokens": 8000,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": true,
+      "reasoning": false,
+      "notes": ""
+    },
+    {
+      "family": "anthropic",
+      "id": "claude-3-5-haiku",
+      "aliases": [
+        "claude-haiku-4.5",
+        "claude-haiku-4-5",
+        "claude-3-5-haiku-20241022"
+      ],
+      "contextWindow": 200000,
+      "maxOutputTokens": 8000,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": true,
+      "reasoning": false,
+      "notes": ""
+    },
+    {
+      "family": "anthropic",
+      "id": "claude-3-opus",
+      "aliases": [
+        "claude-3-opus-20240229"
+      ],
+      "contextWindow": 200000,
+      "maxOutputTokens": 4000,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": true,
+      "reasoning": false,
+      "notes": ""
+    },
+    {
+      "family": "anthropic",
+      "id": "claude-3-sonnet",
+      "aliases": [],
+      "contextWindow": 200000,
+      "maxOutputTokens": 4000,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": true,
+      "reasoning": false,
+      "notes": ""
+    },
+    {
+      "family": "anthropic",
+      "id": "claude-3-haiku",
+      "aliases": [],
+      "contextWindow": 200000,
+      "maxOutputTokens": 4000,
+      "vision": true,
+      "audio": false,
+      "video": false,
+      "tools": true,
+      "reasoning": false,
+      "notes": ""
+    },
+    {
+      "family": "google",
+      "id": "gemini-2.0-flash",
+      "aliases": [
+        "gemini-3-flash-preview",
+        "gemini-3.1-flash-preview",
+        "gemini-3.1-flash-lite-preview"
+      ],
+      "contextWindow": 1048576,
+      "maxOutputTokens": 8192,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": true,
+      "reasoning": false,
+      "notes": ""
+    },
+    {
+      "family": "google",
+      "id": "gemini-2.5-pro",
+      "aliases": [
+        "gemini-3.1-pro-preview",
+        "gemini-3-flash-preview:cloud"
+      ],
+      "contextWindow": 1048576,
+      "maxOutputTokens": 65536,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": true,
+      "reasoning": false,
+      "notes": ""
+    },
+    {
+      "family": "google",
+      "id": "gemma-3",
+      "aliases": [],
+      "contextWindow": 131072,
+      "maxOutputTokens": null,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": false,
+      "notes": "Self-hosted"
+    },
+    {
+      "family": "deepseek",
+      "id": "deepseek-chat",
+      "aliases": [
+        "deepseek-v3"
+      ],
+      "contextWindow": 65536,
+      "maxOutputTokens": 8000,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": true,
+      "reasoning": false,
+      "notes": "Self-hosted supports 128k"
+    },
+    {
+      "family": "deepseek",
+      "id": "deepseek-reasoner",
+      "aliases": [
+        "deepseek-r1"
+      ],
+      "contextWindow": 65536,
+      "maxOutputTokens": 8000,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": true,
+      "notes": "32k max CoT tokens. Self-hosted supports 128k"
+    },
+    {
+      "family": "qwen",
+      "id": "qwen2.5-coder-32b",
+      "aliases": [],
+      "contextWindow": 131072,
+      "maxOutputTokens": 8000,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": true,
+      "reasoning": false,
+      "notes": "Self-hosted max"
+    },
+    {
+      "family": "qwen",
+      "id": "qwen2.5-72b-instruct",
+      "aliases": [
+        "qwen3.5:397b-cloud"
+      ],
+      "contextWindow": 131072,
+      "maxOutputTokens": 8000,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": true,
+      "reasoning": false,
+      "notes": "Self-hosted max"
+    },
+    {
+      "family": "qwen",
+      "id": "qwen2.5-3b",
+      "aliases": [],
+      "contextWindow": 32768,
+      "maxOutputTokens": 8000,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": false,
+      "notes": "Default 32k, 128k possible with config"
+    },
+    {
+      "family": "qwen",
+      "id": "qwq",
+      "aliases": [],
+      "contextWindow": 32768,
+      "maxOutputTokens": 8000,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": true,
+      "notes": ""
+    },
+    {
+      "family": "mistral",
+      "id": "mistral-7b-instruct",
+      "aliases": [],
+      "contextWindow": 32768,
+      "maxOutputTokens": 4000,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": false,
+      "notes": "Self-hosted max"
+    },
+    {
+      "family": "mistral",
+      "id": "mistral-medium",
+      "aliases": [],
+      "contextWindow": 32768,
+      "maxOutputTokens": 4000,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": false,
+      "notes": ""
+    },
+    {
+      "family": "mistral",
+      "id": "mistral-small",
+      "aliases": [],
+      "contextWindow": 32768,
+      "maxOutputTokens": 4000,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": false,
+      "notes": ""
+    },
+    {
+      "family": "mistral",
+      "id": "mistral-large",
+      "aliases": [],
+      "contextWindow": 32768,
+      "maxOutputTokens": 4000,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": false,
+      "notes": ""
+    },
+    {
+      "family": "mistral",
+      "id": "mistral-nemo",
+      "aliases": [],
+      "contextWindow": 131072,
+      "maxOutputTokens": 4000,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": false,
+      "notes": ""
+    },
+    {
+      "family": "local",
+      "id": "llama3.3:70b",
+      "aliases": [],
+      "contextWindow": 131072,
+      "maxOutputTokens": 2000,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": false,
+      "notes": "Ollama default ctx is 2048 — must set num_ctx explicitly"
+    },
+    {
+      "family": "local",
+      "id": "phi4",
+      "aliases": [],
+      "contextWindow": 16384,
+      "maxOutputTokens": 16384,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": false,
+      "notes": "Combined window — 16k split between input & output"
+    },
+    {
+      "family": "local",
+      "id": "nomic-embed-text",
+      "aliases": [
+        "nomic-embed-text:latest"
+      ],
+      "contextWindow": 8192,
+      "maxOutputTokens": null,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": false,
+      "reasoning": false,
+      "notes": "Embedding model — from ollama show"
+    },
+    {
+      "family": "local",
+      "id": "kimi-k2.5",
+      "aliases": [
+        "kimi-k2.5:cloud"
+      ],
+      "contextWindow": 131072,
+      "maxOutputTokens": null,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": true,
+      "reasoning": false,
+      "notes": "Cloud-routed via Ollama proxy"
+    },
+    {
+      "family": "local",
+      "id": "minimax-m2.5",
+      "aliases": [
+        "minimax-m2.7"
+      ],
+      "contextWindow": 131072,
+      "maxOutputTokens": null,
+      "vision": false,
+      "audio": false,
+      "video": false,
+      "tools": true,
+      "reasoning": false,
+      "notes": ""
+    },
+    {
+      "family": "openai",
+      "id": "goldeneye-free-auto",
+      "aliases": [],
+      "contextWindow": null,
+      "maxOutputTokens": null,
+      "vision": null,
+      "audio": false,
+      "video": false,
+      "tools": null,
+      "reasoning": null,
+      "notes": "auto-added from github-copilot probe 2026-04-03"
+    },
+    {
+      "family": "openai",
+      "id": "grok-code-fast-1",
+      "aliases": [],
+      "contextWindow": null,
+      "maxOutputTokens": null,
+      "vision": null,
+      "audio": false,
+      "video": false,
+      "tools": null,
+      "reasoning": null,
+      "notes": "auto-added from github-copilot probe 2026-04-03"
+    },
+    {
+      "family": "openai",
+      "id": "gpt-5.1-codex-mini",
+      "aliases": [],
+      "contextWindow": null,
+      "maxOutputTokens": null,
+      "vision": null,
+      "audio": false,
+      "video": false,
+      "tools": null,
+      "reasoning": null,
+      "notes": "auto-added from github-copilot probe 2026-04-03"
+    },
+    {
+      "family": "openai",
+      "id": "oswe-vscode-prime",
+      "aliases": [],
+      "contextWindow": null,
+      "maxOutputTokens": null,
+      "vision": null,
+      "audio": false,
+      "video": false,
+      "tools": null,
+      "reasoning": null,
+      "notes": "auto-added from github-copilot probe 2026-04-03"
+    },
+    {
+      "family": "openai",
+      "id": "oswe-vscode-secondary",
+      "aliases": [],
+      "contextWindow": null,
+      "maxOutputTokens": null,
+      "vision": null,
+      "audio": false,
+      "video": false,
+      "tools": null,
+      "reasoning": null,
+      "notes": "auto-added from github-copilot probe 2026-04-03"
+    },
+    {
+      "family": "openai",
+      "id": "gpt-41-copilot",
+      "aliases": [],
+      "contextWindow": null,
+      "maxOutputTokens": null,
+      "vision": null,
+      "audio": false,
+      "video": false,
+      "tools": null,
+      "reasoning": null,
+      "notes": "auto-added from github-copilot probe 2026-04-03"
+    }
+  ]
+}
