@@ -8,14 +8,14 @@ Active context window probing for LLM providers. Binary-searches real API endpoi
 
 ### github-copilot
 
-| Model | Limit | Out | Vis | Tools | Rsn | Method | P50 | Probed |
-|---|---|---|---|---|---|---|---|---|
-| `gpt-5.4` | 194K | 128K | ✅ | ✅ | ✅ | binary-search | 9,842ms | 2026-04-03 |
-| `gpt-4o` | 64K | 16K | ✅ | ❌ | ❌ | error-message | — | 2026-04-03 |
-| `claude-opus-4-6` | ~126K | 64K | ✅ | ✅ | ❌ | binary-search | — | 2026-04-03 |
-| `claude-sonnet-4-6` | 128K | 64K | ✅ | ✅ | ❌ | error-message | 11,411ms | 2026-04-03 |
+| Model | Limit | Out | Caps | Rsn | Method | P50 | Probed |
+|---|---|---|---|---|---|---|---|
+| `gpt-5.4` | 194K | 128K | `+/-/-/+` | ✅ | binary-search | 9,842ms | 2026-04-03 |
+| `gpt-4o` | 64K | 16K | `+/-/-/-` | ❌ | error-message | — | 2026-04-03 |
+| `claude-opus-4-6` | ~126K | 64K | `+/-/-/+` | ❌ | binary-search | — | 2026-04-03 |
+| `claude-sonnet-4-6` | 128K | 64K | `+/-/-/+` | ❌ | error-message | 11,411ms | 2026-04-03 |
 
-*Limit = actual enforced at endpoint (not vendor-documented). Out/Vis/Tools/Rsn from vendor docs. P50 = raw API round-trip at near-limit context sizes; `—` = not recorded this run.*
+*Limit = actual enforced at endpoint (not vendor-documented). Out = max output tokens. Caps = `vision/audio/video/tools` (`+` supported, `-` not). Rsn = reasoning mode. P50 = raw API round-trip at near-limit context sizes; `—` = not recorded this run.*
 
 **Pattern:** The GitHub Copilot proxy consistently enforces ~50–64% of the model's native context window. GPT-4o and claude-sonnet return the exact limit in their 400 error messages; gpt-5.4 and claude-opus required full binary search (the error message didn't include a number).
 
