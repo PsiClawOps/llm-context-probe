@@ -1,0 +1,38 @@
+[
+  {
+    "provider": "openai-codex",
+    "model": "gpt-5.4",
+    "probedLimit": null,
+    "vendorLimit": 1050000,
+    "delta": null,
+    "pct": null,
+    "method": "vendor-docs",
+    "probeCount": 0,
+    "probedAt": "2026-04-04",
+    "note": "From developers.openai.com — 1,050,000 context, 128K max output. Cannot probe: chatgpt.com/backend-api behind CloudFlare JS challenge."
+  },
+  {
+    "provider": "openai-codex",
+    "model": "gpt-5.4-mini",
+    "probedLimit": null,
+    "vendorLimit": 400000,
+    "delta": null,
+    "pct": null,
+    "method": "vendor-docs",
+    "probeCount": 0,
+    "probedAt": "2026-04-04",
+    "note": "From developers.openai.com — 400,000 context, 128K max output. Same probe limitation."
+  },
+  {
+    "provider": "openai-codex",
+    "model": "gpt-5.3-codex",
+    "probedLimit": null,
+    "vendorLimit": 400000,
+    "delta": null,
+    "pct": null,
+    "method": "vendor-docs",
+    "probeCount": 0,
+    "probedAt": "2026-04-04",
+    "note": "From developers.openai.com — 400,000 context, 128K max output. Responses API only."
+  }
+]

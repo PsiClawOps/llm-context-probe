@@ -7,7 +7,7 @@ Probe results by provider. Each file is a JSON array of probe records generated 
 | Provider | Models probed | Last run | Notes |
 |---|---|---|---|
 | github-copilot | 10 / ~27 | 2026-04-04 | Claude 4.5/4.6, GPT-5 family, Gemini preview models |
-| openai-codex | 0 / 3 | — | OAuth token expired; needs `openclaw models auth login --provider openai-codex` |
+| openai-codex | 3 / 3 | 2026-04-04 | Vendor-documented — can't probe (CloudFlare challenge on backend-api) |
 | anthropic | — | — | Quota-based (max_tokens trick) |
 | openrouter | — | — | Read-only (context_length from /v1/models) |
 
@@ -25,3 +25,15 @@ Probe results by provider. Each file is a JSON array of probe records generated 
 | `github-copilot/gemini-3-flash-preview` | 128K | error-message | 8,991ms | 2026-04-04 | native 1M; 13% exposed |
 | `github-copilot/gpt-5-mini` | 128K | error-message | 10,902ms | 2026-04-04 | |
 | `github-copilot/gpt-4o` | 64K | error-message | — | 2026-04-03 | native 128K |
+
+## openai-codex (vendor-documented, 2026-04-04)
+
+OpenAI Codex uses `chatgpt.com/backend-api` (not `api.openai.com/v1`). OAuth subscription tokens only work against the backend-api, which is behind CloudFlare JS challenge — can't probe from server-side. Values from official OpenAI model documentation.
+
+| Model | Vendor context | Max output | Source |
+|---|---|---|---|
+| gpt-5.4 | **1,050K** | 128K | [developers.openai.com](https://developers.openai.com/api/docs/models/gpt-5.4) |
+| gpt-5.4-mini | 400K | 128K | [developers.openai.com](https://developers.openai.com/api/docs/models/gpt-5.4-mini) |
+| gpt-5.3-codex | 400K | 128K | [developers.openai.com](https://developers.openai.com/api/docs/models/gpt-5.3-codex) |
+
+> ⚠️ **gpt-5.4 has a 1.05M context window** — the library previously listed 400K. Confirmed on the official model card (snapshot 2026-03-05). Prompts >272K input tokens are priced at 2x input / 1.5x output.
