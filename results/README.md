@@ -6,24 +6,22 @@ Probe results by provider. Each file is a JSON array of probe records generated 
 
 | Provider | Models probed | Last run | Notes |
 |---|---|---|---|
-| github-copilot | 10 / ~27 | 2026-04-04 | Expanded sweep with Claude 4.5/4.6, GPT-5 family, Gemini preview models |
+| github-copilot | 10 / ~27 | 2026-04-04 | Claude 4.5/4.6, GPT-5 family, Gemini preview models |
+| openai-codex | 0 / 3 | — | OAuth token expired; needs `openclaw models auth login --provider openai-codex` |
+| anthropic | — | — | Quota-based (max_tokens trick) |
 | openrouter | — | — | Read-only (context_length from /v1/models) |
 
-## Key findings
+## Probed Results
 
-GitHub Copilot currently enforces caps **well below** the underlying model's native limits, and those caps appear to cluster into a few tiers:
-
-| Model | Copilot enforced | Vendor native | Copilot cap |
-|---|---|---|---|
-| gpt-5.4 | 272K | 400K | 68% of native |
-| gpt-5.3-codex | 272K | 400K | 68% of native |
-| gpt-5.4-mini | 272K | 400K | 68% of native |
-| claude-haiku-4.5 | 128K | 200K | 64% of native |
-| claude-sonnet-4.6 | 128K | 200K | 64% of native |
-| claude-opus-4.6 | 128K | 200K | 64% of native |
-| gemini-3.1-pro-preview | 128K | 400K | 32% of native |
-| gpt-5-mini | 128K | 400K | 32% of native |
-| gemini-3-flash-preview | 128K | 1M | 13% of native |
-| gpt-4o | 64K | 128K | 50% of native |
-
-Most current rejections now return the exact enforced ceiling in the error body, which makes the latest Copilot results exact instead of binary-search estimates.
+| Provider / Model | Enforced | Method | P50 | Probed | Notes |
+|---|---|---|---|---|---|
+| `github-copilot/gpt-5.4` | 272K | error-message | 10,361ms | 2026-04-04 | re-probe raised prior ~194K to exact 272K |
+| `github-copilot/gpt-5.3-codex` | 272K | error-message | 26,897ms | 2026-04-04 | |
+| `github-copilot/gpt-5.4-mini` | 272K | error-message | 14,063ms | 2026-04-04 | timeout extended to 90s |
+| `github-copilot/claude-haiku-4.5` | 128K | error-message | 8,084ms | 2026-04-04 | native 200K |
+| `github-copilot/claude-sonnet-4.6` | 128K | error-message | 9,987ms | 2026-04-04 | native 200K |
+| `github-copilot/claude-opus-4.6` | 128K | error-message | 8,552ms | 2026-04-04 | native 200K |
+| `github-copilot/gemini-3.1-pro-preview` | 128K | error-message | 6,692ms | 2026-04-04 | native 400K |
+| `github-copilot/gemini-3-flash-preview` | 128K | error-message | 8,991ms | 2026-04-04 | native 1M; 13% exposed |
+| `github-copilot/gpt-5-mini` | 128K | error-message | 10,902ms | 2026-04-04 | |
+| `github-copilot/gpt-4o` | 64K | error-message | — | 2026-04-03 | native 128K |

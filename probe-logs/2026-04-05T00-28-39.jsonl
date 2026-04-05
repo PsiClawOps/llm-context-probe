@@ -1,0 +1,6 @@
+{"ts":"2026-04-05T00:28:59.709Z","provider":"github-copilot","model":"claude-sonnet-4.6","inputTokens":1000,"strategy":"request","status":200,"latencyMs":7627,"result":"accepted"}
+{"ts":"2026-04-05T00:29:14.683Z","provider":"github-copilot","model":"claude-sonnet-4.6","inputTokens":8000,"strategy":"request","status":200,"latencyMs":7111,"result":"accepted"}
+{"ts":"2026-04-05T00:29:32.992Z","provider":"github-copilot","model":"claude-sonnet-4.6","inputTokens":32000,"strategy":"request","status":200,"latencyMs":9987,"result":"accepted"}
+{"ts":"2026-04-05T00:29:53.006Z","provider":"github-copilot","model":"claude-sonnet-4.6","inputTokens":50000,"strategy":"request","status":200,"latencyMs":12064,"result":"accepted"}
+{"ts":"2026-04-05T00:30:12.280Z","provider":"github-copilot","model":"claude-sonnet-4.6","inputTokens":128000,"strategy":"request","status":200,"latencyMs":11478,"result":"accepted"}
+{"ts":"2026-04-05T00:30:45.536Z","provider":"github-copilot","model":"claude-sonnet-4.6","inputTokens":200000,"strategy":"request","status":400,"latencyMs":25487,"result":"rejected","exactLimit":128000,"errorSnippet":"{\"error\":{\"message\":\"prompt token count of 173912 exceeds the limit of 128000\",\"code\":\"model_max_prompt_tokens_exceeded\""}

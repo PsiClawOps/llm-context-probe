@@ -4,32 +4,46 @@ Active context window probing for LLM providers. Binary-searches real API endpoi
 
 ---
 
-## Findings
+## Probed Limits
 
-### github-copilot
+| Provider / Model | Enforced | Method | P50 | Probed | Reasoning | Input | Tools | Notes |
+|---|---|---|---|---|---|---|---|---|
+| `github-copilot/gpt-5.4` | 272K | error-message | 10,361ms | 2026-04-04 | ✅ `low` `medium` `high` | 🖼️ | ✅ | was ~194K on 04-03; re-probe returned exact 272K |
+| `github-copilot/gpt-5.3-codex` | 272K | error-message | 26,897ms | 2026-04-04 | ✅ `low` `medium` `high` | 🖼️ | ❌ | codex-optimized; no tool use |
+| `github-copilot/gpt-5.4-mini` | 272K | error-message | 14,063ms | 2026-04-04 | ✅ `low` `medium` `high` | 🖼️ | ✅ | timeout extended to 90s to finish probe |
+| `github-copilot/claude-haiku-4.5` | 128K | error-message | 8,084ms | 2026-04-04 | ❌ | — | ✅ | native 200K; Copilot caps at 64% |
+| `github-copilot/claude-sonnet-4.6` | 128K | error-message | 9,987ms | 2026-04-04 | ❌ | 🖼️ | ✅ | native 200K (1M w/ beta header) |
+| `github-copilot/claude-opus-4.6` | 128K | error-message | 8,552ms | 2026-04-04 | ❌ | 🖼️ | ✅ | native 200K (1M w/ beta header) |
+| `github-copilot/gemini-3.1-pro-preview` | 128K | error-message | 6,692ms | 2026-04-04 | ❌ | 🖼️ 🎥 | ✅ | native 400K; biggest relative cap |
+| `github-copilot/gemini-3-flash-preview` | 128K | error-message | 8,991ms | 2026-04-04 | ❌ | 🖼️ 🎥 | ✅ | native 1M; 13% of native exposed |
+| `github-copilot/gpt-5-mini` | 128K | error-message | 10,902ms | 2026-04-04 | ✅ `low` `medium` `high` | 🖼️ | ✅ | |
+| `github-copilot/gpt-4o` | 64K | error-message | — | 2026-04-03 | ❌ | 🖼️ | ✅ | legacy; 50% of native 128K |
 
-| Model | Enforced | Vendor native | Copilot cap | Method | P50 | Probed |
-|---|---|---|---|---|---|---|
-| `claude-haiku-4.5` | 128K | 200K | 64% | error-message | 8,084ms | 2026-04-04 |
-| `claude-sonnet-4.6` | 128K | 200K | 64% | error-message | 9,987ms | 2026-04-04 |
-| `claude-opus-4.6` | 128K | 200K | 64% | error-message | 8,552ms | 2026-04-04 |
-| `gpt-5.4` | 272K | 400K | 68% | error-message | 10,361ms | 2026-04-04 |
-| `gpt-5.3-codex` | 272K | 400K | 68% | error-message | 26,897ms | 2026-04-04 |
-| `gpt-5.4-mini` | 272K | 400K | 68% | error-message | 14,063ms | 2026-04-04 |
-| `gemini-3.1-pro-preview` | 128K | 400K | 32% | error-message | 6,692ms | 2026-04-04 |
-| `gemini-3-flash-preview` | 128K | 1,000K | 13% | error-message | 8,991ms | 2026-04-04 |
-| `gpt-5-mini` | 128K | 400K | 32% | error-message | 10,902ms | 2026-04-04 |
-| `gpt-4o` | 64K | 128K | 50% | error-message | — | 2026-04-03 |
+**Column key:**
+- **Enforced** — actual prompt-token limit at the live endpoint, not vendor-documented
+- **Method** — `error-message` (exact limit from 400 body) · `binary-search` (converged estimate) · `read-only` (from `/v1/models`)
+- **P50** — median API round-trip latency on accepted near-limit requests
+- **Reasoning** — whether the model supports reasoning/thinking; modes listed if known
+- **Input** — 🖼️ image · 🎧 audio · 🎥 video (blank = text only)
+- **Tools** — function calling / tool use support
 
-*Enforced = actual prompt limit at the endpoint, not the vendor-documented native window. P50 = raw API round-trip latency on accepted near-limit requests for that run.*
+---
 
-**Pattern:** GitHub Copilot is not exposing native windows. As of this run, it appears to bucket models into a few enforced prompt tiers: **64K** (`gpt-4o`), **128K** (Claude 4.5/4.6, Gemini 3.1 Pro Preview, Gemini 3 Flash Preview, `gpt-5-mini`), and **272K** (`gpt-5.4`, `gpt-5.3-codex`, `gpt-5.4-mini`). The biggest compression in this sweep is `gemini-3-flash-preview`: **128K enforced on a 1M-native model**.
+## Observations
 
-**Notable change:** `gpt-5.4` was previously estimated at ~194K via binary search on 2026-04-03. A fresh probe on 2026-04-04 returned an explicit `limit of 272000` error, so the earlier number was stale or undercounted.
+GitHub Copilot currently buckets models into a few enforced prompt tiers rather than exposing native windows:
 
-**Methodology:** Request-based probing through the live GitHub Copilot endpoint. Most current GitHub Copilot models now return the exact enforced limit in their 400 error messages (`prompt token count of X exceeds the limit of Y`), so these results are mostly exact rather than inferred.
+| Tier | Enforced | Models |
+|---|---|---|
+| 272K | 272,000 | `gpt-5.4`, `gpt-5.3-codex`, `gpt-5.4-mini` |
+| 128K | 128,000 | Claude 4.5/4.6 (all tiers), Gemini 3.x, `gpt-5-mini` |
+| 64K | 64,000 | `gpt-4o` |
 
-**Rate limiting:** No 429s encountered during this sweep. Several models were slow enough that the probe timeout had to be extended from 30s to 90s to distinguish transport timeout from true context rejection.
+The biggest compression is `gemini-3-flash-preview`: **128K enforced on a 1M-native model** (13%).
+
+All current results come from the `error-message` method — GitHub Copilot now returns the exact enforced ceiling in 400 error bodies (`prompt token count of X exceeds the limit of Y`).
+
+No 429s were encountered during this sweep. Several models required extending the probe timeout from 30s to 90s to distinguish transport timeouts from true context rejection.
 
 ---
 
@@ -131,8 +145,8 @@ node probe.mjs --probe-limits --provider github-copilot --json
   [claude-sonnet-4-6] ranging (slow mode ~4s/probe)... ✓1K ✓8K ✓32K ✓50K ✓128K exact=128,000 (from error msg)
   [gpt-5.4] ranging... ✓1K ✓8K ✓32K ✓50K ✓128K ✓200K binary[193K–194K] → ~194K
 
- PROVIDER/MODEL                   PROBED CTX  PREV CTX  DELTA    PROBES  METHOD           P50 LAT  P95 LAT
- ─────────────────────────────── ─────────  ────────  ──────   ──────  ──────────────  ────────  ────────
+ PROVIDER/MODEL                    PROBED CTX  PREV CTX  DELTA    PROBES  METHOD           P50 LAT  P95 LAT
+ ──────────────────────────────── ─────────  ────────  ──────   ──────  ──────────────  ────────  ────────
  github-copilot/claude-sonnet-4-6  128K        200K      -72K     6       error-message   11411ms   26449ms
  github-copilot/gpt-5.4            194K        400K      -206K    15      binary-search   9842ms    24091ms
 ```
@@ -159,7 +173,7 @@ Each file in `results/` is a JSON array:
 ```jsonc
 {
   "provider": "github-copilot",
-  "model": "claude-sonnet-4-6",
+  "model": "claude-sonnet-4.6",
   "probedLimit": 128000,     // actual enforced limit found by probing
   "vendorLimit": 200000,     // vendor-documented native limit
   "delta": -72000,           // gap (negative = proxy caps below native)

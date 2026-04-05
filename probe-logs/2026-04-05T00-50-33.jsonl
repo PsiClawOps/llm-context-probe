@@ -1,0 +1,6 @@
+{"ts":"2026-04-05T00:50:53.330Z","provider":"github-copilot","model":"gemini-3.1-pro-preview","inputTokens":1000,"strategy":"request","status":200,"latencyMs":5915,"result":"accepted"}
+{"ts":"2026-04-05T00:51:07.960Z","provider":"github-copilot","model":"gemini-3.1-pro-preview","inputTokens":8000,"strategy":"request","status":200,"latencyMs":6257,"result":"accepted"}
+{"ts":"2026-04-05T00:51:23.325Z","provider":"github-copilot","model":"gemini-3.1-pro-preview","inputTokens":32000,"strategy":"request","status":200,"latencyMs":6692,"result":"accepted"}
+{"ts":"2026-04-05T00:51:39.911Z","provider":"github-copilot","model":"gemini-3.1-pro-preview","inputTokens":50000,"strategy":"request","status":200,"latencyMs":8142,"result":"accepted"}
+{"ts":"2026-04-05T00:52:14.918Z","provider":"github-copilot","model":"gemini-3.1-pro-preview","inputTokens":128000,"strategy":"request","status":200,"latencyMs":27311,"result":"accepted"}
+{"ts":"2026-04-05T00:52:28.019Z","provider":"github-copilot","model":"gemini-3.1-pro-preview","inputTokens":200000,"strategy":"request","status":400,"latencyMs":4966,"result":"rejected","exactLimit":128000,"errorSnippet":"{\"error\":{\"message\":\"prompt token count of 173912 exceeds the limit of 128000\",\"code\":\"model_max_prompt_tokens_exceeded\""}

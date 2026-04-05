@@ -1,0 +1,5 @@
+{"ts":"2026-04-05T00:41:09.025Z","provider":"github-copilot","model":"gemini-3.1-pro-preview","inputTokens":1000,"strategy":"request","status":200,"latencyMs":10355,"result":"accepted"}
+{"ts":"2026-04-05T00:41:47.001Z","provider":"github-copilot","model":"gemini-3.1-pro-preview","inputTokens":8000,"strategy":"request","latencyMs":30001,"result":"error","error":"The operation was aborted due to timeout"}
+{"ts":"2026-04-05T00:42:18.789Z","provider":"github-copilot","model":"gemini-3.1-pro-preview","inputTokens":4500,"strategy":"request","status":200,"latencyMs":23816,"result":"accepted"}
+{"ts":"2026-04-05T00:42:33.614Z","provider":"github-copilot","model":"gemini-3.1-pro-preview","inputTokens":6250,"strategy":"request","status":200,"latencyMs":6626,"result":"accepted"}
+{"ts":"2026-04-05T00:43:11.519Z","provider":"github-copilot","model":"gemini-3.1-pro-preview","inputTokens":7125,"strategy":"request","latencyMs":29999,"result":"error","error":"The operation was aborted due to timeout"}

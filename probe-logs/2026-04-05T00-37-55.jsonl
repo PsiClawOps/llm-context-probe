@@ -1,0 +1,8 @@
+{"ts":"2026-04-05T00:38:17.089Z","provider":"github-copilot","model":"gpt-5.4-mini","inputTokens":1000,"strategy":"request","status":200,"latencyMs":8174,"result":"accepted"}
+{"ts":"2026-04-05T00:38:34.929Z","provider":"github-copilot","model":"gpt-5.4-mini","inputTokens":8000,"strategy":"request","status":200,"latencyMs":9461,"result":"accepted"}
+{"ts":"2026-04-05T00:39:12.678Z","provider":"github-copilot","model":"gpt-5.4-mini","inputTokens":32000,"strategy":"request","latencyMs":30001,"result":"error","error":"The operation was aborted due to timeout"}
+{"ts":"2026-04-05T00:39:27.435Z","provider":"github-copilot","model":"gpt-5.4-mini","inputTokens":20000,"strategy":"request","status":200,"latencyMs":7012,"result":"accepted"}
+{"ts":"2026-04-05T00:39:54.070Z","provider":"github-copilot","model":"gpt-5.4-mini","inputTokens":26000,"strategy":"request","status":200,"latencyMs":18666,"result":"accepted"}
+{"ts":"2026-04-05T00:40:14.687Z","provider":"github-copilot","model":"gpt-5.4-mini","inputTokens":29000,"strategy":"request","status":200,"latencyMs":11447,"result":"accepted"}
+{"ts":"2026-04-05T00:40:31.382Z","provider":"github-copilot","model":"gpt-5.4-mini","inputTokens":30500,"strategy":"request","status":200,"latencyMs":8470,"result":"accepted"}
+{"ts":"2026-04-05T00:40:45.712Z","provider":"github-copilot","model":"gpt-5.4-mini","inputTokens":31250,"strategy":"request","status":200,"latencyMs":6252,"result":"accepted"}

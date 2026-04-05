@@ -1,0 +1,7 @@
+{"ts":"2026-04-05T00:48:37.072Z","provider":"github-copilot","model":"gpt-5.4-mini","inputTokens":1000,"strategy":"request","status":200,"latencyMs":26480,"result":"accepted"}
+{"ts":"2026-04-05T00:48:53.957Z","provider":"github-copilot","model":"gpt-5.4-mini","inputTokens":8000,"strategy":"request","status":200,"latencyMs":8834,"result":"accepted"}
+{"ts":"2026-04-05T00:49:10.453Z","provider":"github-copilot","model":"gpt-5.4-mini","inputTokens":32000,"strategy":"request","status":200,"latencyMs":7994,"result":"accepted"}
+{"ts":"2026-04-05T00:49:32.543Z","provider":"github-copilot","model":"gpt-5.4-mini","inputTokens":50000,"strategy":"request","status":200,"latencyMs":14063,"result":"accepted"}
+{"ts":"2026-04-05T00:50:02.330Z","provider":"github-copilot","model":"gpt-5.4-mini","inputTokens":128000,"strategy":"request","status":200,"latencyMs":22092,"result":"accepted"}
+{"ts":"2026-04-05T00:50:18.120Z","provider":"github-copilot","model":"gpt-5.4-mini","inputTokens":200000,"strategy":"request","status":200,"latencyMs":8031,"result":"accepted"}
+{"ts":"2026-04-05T00:50:33.928Z","provider":"github-copilot","model":"gpt-5.4-mini","inputTokens":400000,"strategy":"request","status":400,"latencyMs":8052,"result":"rejected","exactLimit":272000,"errorSnippet":"{\"error\":{\"message\":\"prompt token count of 347817 exceeds the limit of 272000\",\"code\":\"model_max_prompt_tokens_exceeded\""}

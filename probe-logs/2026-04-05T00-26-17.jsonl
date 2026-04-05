@@ -1,0 +1,7 @@
+{"ts":"2026-04-05T00:26:37.427Z","provider":"github-copilot","model":"claude-haiku-4.5","inputTokens":1000,"strategy":"request","status":200,"latencyMs":6780,"result":"accepted"}
+{"ts":"2026-04-05T00:26:52.405Z","provider":"github-copilot","model":"claude-haiku-4.5","inputTokens":8000,"strategy":"request","status":200,"latencyMs":7005,"result":"accepted"}
+{"ts":"2026-04-05T00:27:07.505Z","provider":"github-copilot","model":"claude-haiku-4.5","inputTokens":32000,"strategy":"request","status":200,"latencyMs":6847,"result":"accepted"}
+{"ts":"2026-04-05T00:27:23.936Z","provider":"github-copilot","model":"claude-haiku-4.5","inputTokens":50000,"strategy":"request","status":200,"latencyMs":8084,"result":"accepted"}
+{"ts":"2026-04-05T00:27:59.874Z","provider":"github-copilot","model":"claude-haiku-4.5","inputTokens":128000,"strategy":"request","status":200,"latencyMs":27959,"result":"accepted"}
+{"ts":"2026-04-05T00:28:17.167Z","provider":"github-copilot","model":"claude-haiku-4.5","inputTokens":200000,"strategy":"request","status":200,"latencyMs":9355,"result":"accepted"}
+{"ts":"2026-04-05T00:28:33.225Z","provider":"github-copilot","model":"claude-haiku-4.5","inputTokens":400000,"strategy":"request","status":400,"latencyMs":8340,"result":"rejected","exactLimit":128000,"errorSnippet":"{\"error\":{\"message\":\"prompt token count of 347824 exceeds the limit of 128000\",\"code\":\"model_max_prompt_tokens_exceeded\""}
