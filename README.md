@@ -18,10 +18,15 @@ Active context window probing for LLM providers. Binary-searches real API endpoi
 | `github-copilot/gemini-3-flash-preview` | 128K | error-message | 8,991ms | 2026-04-04 | ❌ | 🖼️ 🎥 | ✅ | native 1M; 13% of native exposed |
 | `github-copilot/gpt-5-mini` | 128K | error-message | 10,902ms | 2026-04-04 | ✅ `low` `medium` `high` | 🖼️ | ✅ | |
 | `github-copilot/gpt-4o` | 64K | error-message | — | 2026-04-03 | ❌ | 🖼️ | ✅ | legacy; 50% of native 128K |
+| | | | | | | | | |
+| `openai-codex/gpt-5.4` | **272K** | source-code | — | 2026-04-04 | ✅ | 🖼️ | ✅ | direct API 1.05M; sub caps at 26% |
+| `openai-codex/gpt-5.3-codex` | **272K** | source-code | — | 2026-04-04 | ✅ | 🖼️ | ❌ | direct API 400K; sub caps at 68% |
+| `openai-codex/gpt-5.3-codex-spark` | **128K** | source-code | — | 2026-04-04 | ✅ | text | ❌ | matches direct API (both 128K) |
+| `openai-codex/(default)` | **200K** | source-code | — | 2026-04-04 | — | — | — | fallback for unrecognized models |
 
 **Column key:**
 - **Enforced** — actual prompt-token limit at the live endpoint, not vendor-documented
-- **Method** — `error-message` (exact limit from 400 body) · `binary-search` (converged estimate) · `read-only` (from `/v1/models`)
+- **Method** — `error-message` (exact limit from 400 body) · `binary-search` (converged estimate) · `source-code` (extracted from provider runtime) · `read-only` (from `/v1/models`)
 - **P50** — median API round-trip latency on accepted near-limit requests
 - **Reasoning** — whether the model supports reasoning/thinking; modes listed if known
 - **Input** — 🖼️ image · 🎧 audio · 🎥 video (blank = text only)
@@ -43,13 +48,16 @@ OpenAI Codex routes through `chatgpt.com/backend-api` (not `api.openai.com/v1`).
 
 ## Observations
 
-GitHub Copilot currently buckets models into a few enforced prompt tiers rather than exposing native windows:
+GitHub Copilot and the OpenAI Codex subscription API both bucket models into enforced prompt tiers rather than exposing native windows:
 
-| Tier | Enforced | Models |
-|---|---|---|
-| 272K | 272,000 | `gpt-5.4`, `gpt-5.3-codex`, `gpt-5.4-mini` |
-| 128K | 128,000 | Claude 4.5/4.6 (all tiers), Gemini 3.x, `gpt-5-mini` |
-| 64K | 64,000 | `gpt-4o` |
+| Tier | Enforced | Provider(s) | Models |
+|---|---|---|---|
+| 272K | 272,000 | github-copilot, openai-codex | `gpt-5.4`, `gpt-5.3-codex`, `gpt-5.4-mini` |
+| 200K | 200,000 | openai-codex | (default/fallback for unrecognized models) |
+| 128K | 128,000 | github-copilot, openai-codex | Claude 4.5/4.6, Gemini 3.x, `gpt-5-mini`, `gpt-5.3-codex-spark` |
+| 64K | 64,000 | github-copilot | `gpt-4o` |
+
+The 272K cap appears to be an upstream OpenAI limit for subscription-tier access — both github-copilot and openai-codex enforce exactly the same number.
 
 The biggest compression is `gemini-3-flash-preview`: **128K enforced on a 1M-native model** (13%).
 

@@ -7,7 +7,7 @@ Probe results by provider. Each file is a JSON array of probe records generated 
 | Provider | Models probed | Last run | Notes |
 |---|---|---|---|
 | github-copilot | 10 / ~27 | 2026-04-04 | Claude 4.5/4.6, GPT-5 family, Gemini preview models |
-| openai-codex | 3 / 3 | 2026-04-04 | Vendor-documented — can't probe (CloudFlare challenge on backend-api) |
+| openai-codex | 4 / 4 | 2026-04-04 | Source-code extraction from OpenClaw runtime + vendor docs |
 | anthropic | — | — | Quota-based (max_tokens trick) |
 | openrouter | — | — | Read-only (context_length from /v1/models) |
 
@@ -26,14 +26,17 @@ Probe results by provider. Each file is a JSON array of probe records generated 
 | `github-copilot/gpt-5-mini` | 128K | error-message | 10,902ms | 2026-04-04 | |
 | `github-copilot/gpt-4o` | 64K | error-message | — | 2026-04-03 | native 128K |
 
-## openai-codex (vendor-documented, 2026-04-04)
+## openai-codex (subscription API via chatgpt.com/backend-api)
 
-OpenAI Codex uses `chatgpt.com/backend-api` (not `api.openai.com/v1`). OAuth subscription tokens only work against the backend-api, which is behind CloudFlare JS challenge — can't probe from server-side. Values from official OpenAI model documentation.
+The `openai-codex` provider routes through `chatgpt.com/backend-api` using ChatGPT Pro subscription OAuth tokens — **not** `api.openai.com/v1`. Can't probe directly (CloudFlare JS challenge). Limits extracted from OpenClaw's runtime source (`dist/openai-codex-provider-DOzGU_dN.js`).
 
-| Model | Vendor context | Max output | Source |
-|---|---|---|---|
-| gpt-5.4 | **1,050K** | 128K | [developers.openai.com](https://developers.openai.com/api/docs/models/gpt-5.4) |
-| gpt-5.4-mini | 400K | 128K | [developers.openai.com](https://developers.openai.com/api/docs/models/gpt-5.4-mini) |
-| gpt-5.3-codex | 400K | 128K | [developers.openai.com](https://developers.openai.com/api/docs/models/gpt-5.3-codex) |
+| Model | Subscription ctx | Direct API ctx | Max output | Method | Source |
+|---|---|---|---|---|---|
+| gpt-5.4 | **272K** | 1,050K | 128K | source-code | `OPENAI_CODEX_GPT_54_CONTEXT_TOKENS = 272e3` |
+| gpt-5.3-codex | **272K** | 400K | 128K | source-code | template inherits gpt-5.4 constant |
+| gpt-5.3-codex-spark | **128K** | 128K | 128K | source-code | `OPENAI_CODEX_GPT_53_SPARK_CONTEXT_TOKENS = 128e3` |
+| (default/other) | **200K** | varies | 200K | source-code | fallback: `patch?.contextWindow ?? 2e5` |
 
-> ⚠️ **gpt-5.4 has a 1.05M context window** — the library previously listed 400K. Confirmed on the official model card (snapshot 2026-03-05). Prompts >272K input tokens are priced at 2x input / 1.5x output.
+> ⚠️ **The subscription API caps gpt-5.4 at 272K** — only 26% of the direct API's 1.05M context window. This matches the github-copilot enforced limit exactly (also 272K), suggesting both proxy providers enforce the same upstream cap.
+>
+> The direct API's 1.05M window requires per-token billing and charges 2x input / 1.5x output for prompts >272K.

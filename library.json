@@ -84,7 +84,7 @@
       "video": false,
       "tools": false,
       "reasoning": true,
-      "notes": "Most capable agentic coding model \u2014 Responses API only (2026-02-05)"
+      "notes": "Direct API: 400K ctx; openai-codex subscription: 272K ctx, 128K max output"
     },
     {
       "family": "openai",
@@ -99,7 +99,7 @@
       "video": false,
       "tools": true,
       "reasoning": true,
-      "notes": "Frontier model \u2014 1.05M context, coding + agentic + professional (2026-03-05)",
+      "notes": "Direct API: 1.05M ctx; openai-codex subscription: 272K ctx, 128K max output",
       "probed": {
         "limit": 193812,
         "method": "binary-search",
@@ -120,7 +120,7 @@
       "video": false,
       "tools": true,
       "reasoning": true,
-      "notes": "Strongest mini model \u2014 coding, computer use, subagents (2026-03-17)"
+      "notes": "Direct API: 400K ctx; openai-codex subscription: 272K ctx (template from gpt-5.4)"
     },
     {
       "family": "openai",
@@ -133,7 +133,7 @@
       "video": false,
       "tools": true,
       "reasoning": true,
-      "notes": "Fastest, most cost-efficient GPT-5 variant"
+      "notes": "Direct API: 400K ctx"
     },
     {
       "family": "openai",
@@ -843,7 +843,7 @@
       "video": false,
       "tools": true,
       "reasoning": true,
-      "notes": "Cheapest GPT-5.4-class model for high-volume tasks (2026-03-17)"
+      "notes": "Direct API: 400K ctx"
     },
     {
       "family": "openai",
@@ -856,7 +856,7 @@
       "video": false,
       "tools": true,
       "reasoning": true,
-      "notes": "Ultra-fast text-only coding \u2014 Cerebras, research preview (2026-02-12)"
+      "notes": "Direct API: 128K ctx; openai-codex subscription: 128K ctx (same)"
     },
     {
       "family": "openai",

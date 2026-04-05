@@ -2,37 +2,49 @@
   {
     "provider": "openai-codex",
     "model": "gpt-5.4",
-    "probedLimit": null,
-    "vendorLimit": 1050000,
-    "delta": null,
-    "pct": null,
-    "method": "vendor-docs",
+    "probedContextWindow": 272000,
+    "nativeContextWindow": 1050000,
+    "maxOutputTokens": 128000,
+    "method": "source-code",
+    "note": "OpenClaw openai-codex-provider constant OPENAI_CODEX_GPT_54_CONTEXT_TOKENS = 272e3; subscription API via chatgpt.com/backend-api",
     "probeCount": 0,
     "probedAt": "2026-04-04",
-    "note": "From developers.openai.com — 1,050,000 context, 128K max output. Cannot probe: chatgpt.com/backend-api behind CloudFlare JS challenge."
-  },
-  {
-    "provider": "openai-codex",
-    "model": "gpt-5.4-mini",
-    "probedLimit": null,
-    "vendorLimit": 400000,
-    "delta": null,
-    "pct": null,
-    "method": "vendor-docs",
-    "probeCount": 0,
-    "probedAt": "2026-04-04",
-    "note": "From developers.openai.com — 400,000 context, 128K max output. Same probe limitation."
+    "source": "openclaw dist/openai-codex-provider-DOzGU_dN.js"
   },
   {
     "provider": "openai-codex",
     "model": "gpt-5.3-codex",
-    "probedLimit": null,
-    "vendorLimit": 400000,
-    "delta": null,
-    "pct": null,
-    "method": "vendor-docs",
+    "probedContextWindow": 272000,
+    "nativeContextWindow": 400000,
+    "maxOutputTokens": 128000,
+    "method": "source-code",
+    "note": "Template model inherits OPENAI_CODEX_GPT_54_CONTEXT_TOKENS; subscription API",
     "probeCount": 0,
     "probedAt": "2026-04-04",
-    "note": "From developers.openai.com — 400,000 context, 128K max output. Responses API only."
+    "source": "openclaw dist/openai-codex-provider-DOzGU_dN.js"
+  },
+  {
+    "provider": "openai-codex",
+    "model": "gpt-5.3-codex-spark",
+    "probedContextWindow": 128000,
+    "nativeContextWindow": 128000,
+    "maxOutputTokens": 128000,
+    "method": "source-code",
+    "note": "OPENAI_CODEX_GPT_53_SPARK_CONTEXT_TOKENS = 128e3; no cap vs native (both 128K)",
+    "probeCount": 0,
+    "probedAt": "2026-04-04",
+    "source": "openclaw dist/openai-codex-provider-DOzGU_dN.js"
+  },
+  {
+    "provider": "openai-codex",
+    "model": "(default/other)",
+    "probedContextWindow": 200000,
+    "nativeContextWindow": null,
+    "maxOutputTokens": 200000,
+    "method": "source-code",
+    "note": "Fallback for unrecognized models: contextWindow = patch?.contextWindow ?? 2e5",
+    "probeCount": 0,
+    "probedAt": "2026-04-04",
+    "source": "openclaw dist/openai-codex-provider-DOzGU_dN.js"
   }
 ]
