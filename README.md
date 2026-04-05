@@ -27,6 +27,18 @@ Active context window probing for LLM providers. Binary-searches real API endpoi
 - **Input** — 🖼️ image · 🎧 audio · 🎥 video (blank = text only)
 - **Tools** — function calling / tool use support
 
+### openai-codex (vendor-documented)
+
+OpenAI Codex routes through `chatgpt.com/backend-api` (not `api.openai.com/v1`). The endpoint is behind CloudFlare JS challenge — can't probe from server-side. These are the vendor-published limits from [developers.openai.com](https://developers.openai.com/api/docs/models):
+
+| Model | Context | Max output | Reasoning | Source |
+|---|---|---|---|---|
+| `gpt-5.4` | **1,050K** | 128K | ✅ `none` `low` `medium` `high` `xhigh` | [model card](https://developers.openai.com/api/docs/models/gpt-5.4) |
+| `gpt-5.4-mini` | 400K | 128K | ✅ `none` `low` `medium` `high` `xhigh` | [model card](https://developers.openai.com/api/docs/models/gpt-5.4-mini) |
+| `gpt-5.3-codex` | 400K | 128K | ✅ `low` `medium` `high` `xhigh` | [model card](https://developers.openai.com/api/docs/models/gpt-5.3-codex) |
+
+> ⚠️ **gpt-5.4 jumped to 1.05M context** — confirmed on the official model card (snapshot 2026-03-05). Prompts >272K input tokens are priced at 2x input / 1.5x output for the full session.
+
 ---
 
 ## Observations
