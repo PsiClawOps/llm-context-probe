@@ -8,20 +8,28 @@ Active context window probing for LLM providers. Binary-searches real API endpoi
 
 ### github-copilot
 
-| Model | Limit | Out | Caps | Rsn | Method | P50 | Probed |
-|---|---|---|---|---|---|---|---|
-| `gpt-5.4` | 194K | 128K | `+/-/-/+` | ✅ | binary-search | 9,842ms | 2026-04-03 |
-| `gpt-4o` | 64K | 16K | `+/-/-/-` | ❌ | error-message | — | 2026-04-03 |
-| `claude-opus-4-6` | ~126K | 64K | `+/-/-/+` | ❌ | binary-search | — | 2026-04-03 |
-| `claude-sonnet-4-6` | 128K | 64K | `+/-/-/+` | ❌ | error-message | 11,411ms | 2026-04-03 |
+| Model | Enforced | Vendor native | Copilot cap | Method | P50 | Probed |
+|---|---|---|---|---|---|---|
+| `claude-haiku-4.5` | 128K | 200K | 64% | error-message | 8,084ms | 2026-04-04 |
+| `claude-sonnet-4.6` | 128K | 200K | 64% | error-message | 9,987ms | 2026-04-04 |
+| `claude-opus-4.6` | 128K | 200K | 64% | error-message | 8,552ms | 2026-04-04 |
+| `gpt-5.4` | 272K | 400K | 68% | error-message | 10,361ms | 2026-04-04 |
+| `gpt-5.3-codex` | 272K | 400K | 68% | error-message | 26,897ms | 2026-04-04 |
+| `gpt-5.4-mini` | 272K | 400K | 68% | error-message | 14,063ms | 2026-04-04 |
+| `gemini-3.1-pro-preview` | 128K | 400K | 32% | error-message | 6,692ms | 2026-04-04 |
+| `gemini-3-flash-preview` | 128K | 1,000K | 13% | error-message | 8,991ms | 2026-04-04 |
+| `gpt-5-mini` | 128K | 400K | 32% | error-message | 10,902ms | 2026-04-04 |
+| `gpt-4o` | 64K | 128K | 50% | error-message | — | 2026-04-03 |
 
-*Limit = actual enforced at endpoint (not vendor-documented). Out = max output tokens. Caps = `vision/audio/video/tools` (`+` supported, `-` not). Rsn = reasoning mode. P50 = raw API round-trip at near-limit context sizes; `—` = not recorded this run.*
+*Enforced = actual prompt limit at the endpoint, not the vendor-documented native window. P50 = raw API round-trip latency on accepted near-limit requests for that run.*
 
-**Pattern:** The GitHub Copilot proxy consistently enforces ~50–64% of the model's native context window. GPT-4o and claude-sonnet return the exact limit in their 400 error messages; gpt-5.4 and claude-opus required full binary search (the error message didn't include a number).
+**Pattern:** GitHub Copilot is not exposing native windows. As of this run, it appears to bucket models into a few enforced prompt tiers: **64K** (`gpt-4o`), **128K** (Claude 4.5/4.6, Gemini 3.1 Pro Preview, Gemini 3 Flash Preview, `gpt-5-mini`), and **272K** (`gpt-5.4`, `gpt-5.3-codex`, `gpt-5.4-mini`). The biggest compression in this sweep is `gemini-3-flash-preview`: **128K enforced on a 1M-native model**.
 
-**Methodology:** Request-based binary search — real content-fill requests at increasing token counts until rejection. Flat-rate subscription billing means zero marginal cost per request.
+**Notable change:** `gpt-5.4` was previously estimated at ~194K via binary search on 2026-04-03. A fresh probe on 2026-04-04 returned an explicit `limit of 272000` error, so the earlier number was stale or undercounted.
 
-**Rate limiting:** No 429s encountered during this probe run (~38 requests across 4 models). No ceiling established.
+**Methodology:** Request-based probing through the live GitHub Copilot endpoint. Most current GitHub Copilot models now return the exact enforced limit in their 400 error messages (`prompt token count of X exceeds the limit of Y`), so these results are mostly exact rather than inferred.
+
+**Rate limiting:** No 429s encountered during this sweep. Several models were slow enough that the probe timeout had to be extended from 30s to 90s to distinguish transport timeout from true context rejection.
 
 ---
 
@@ -82,6 +90,9 @@ node probe.mjs --probe-limits --provider github-copilot --veryslow
 # Force re-probe even if cached within 7 days
 node probe.mjs --probe-limits --provider github-copilot --force
 
+# Increase per-request timeout for slow models
+PROBE_TIMEOUT_MS=90000 node probe.mjs --probe-limits --provider github-copilot --model gemini-3.1-pro-preview
+
 # Show static library data without probing
 node probe.mjs --library
 
@@ -104,6 +115,12 @@ node probe.mjs --probe-limits --provider github-copilot --json
 | `--library` | Print static library table (no live probing) |
 | `--billing <mode>` | Override billing mode: `request`, `quota`, or `read-only` |
 | `--no-log` | Disable JSONL probe log (default: logs to `probe-logs/`) |
+
+### Environment variables
+
+| Variable | Description |
+|---|---|
+| `PROBE_TIMEOUT_MS` | Override the default 30s per-request timeout when probing slow models. Example: `90000` for 90s. |
 
 ### Output
 

@@ -559,7 +559,7 @@ async function singleProbe(providerName, config, modelId, inputTokens, strategy)
       method: 'POST',
       headers,
       body: JSON.stringify(body),
-      signal: AbortSignal.timeout(30000),
+      signal: AbortSignal.timeout(Number(process.env.PROBE_TIMEOUT_MS || 30000)),
     });
 
     const latencyMs = Date.now() - t0;
@@ -624,7 +624,7 @@ async function singleProbeAnthropic(providerName, config, modelId, inputTokens, 
       method: 'POST',
       headers,
       body: JSON.stringify(body),
-      signal: AbortSignal.timeout(30000),
+      signal: AbortSignal.timeout(Number(process.env.PROBE_TIMEOUT_MS || 30000)),
     });
 
     const latencyMs = Date.now() - t0;

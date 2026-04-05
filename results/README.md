@@ -6,17 +6,24 @@ Probe results by provider. Each file is a JSON array of probe records generated 
 
 | Provider | Models probed | Last run | Notes |
 |---|---|---|---|
-| github-copilot | 2 / ~27 | 2026-04-03 | Partial — full sweep in progress |
-| github-copilot | 0 | — | Not yet run |
+| github-copilot | 10 / ~27 | 2026-04-04 | Expanded sweep with Claude 4.5/4.6, GPT-5 family, Gemini preview models |
 | openrouter | — | — | Read-only (context_length from /v1/models) |
 
 ## Key findings
 
-Copilot proxy enforces caps **well below** the underlying model's native limits:
+GitHub Copilot currently enforces caps **well below** the underlying model's native limits, and those caps appear to cluster into a few tiers:
 
 | Model | Copilot enforced | Vendor native | Copilot cap |
 |---|---|---|---|
-| gpt-4o | 64K | 128K | 50% of native |
+| gpt-5.4 | 272K | 400K | 68% of native |
+| gpt-5.3-codex | 272K | 400K | 68% of native |
+| gpt-5.4-mini | 272K | 400K | 68% of native |
+| claude-haiku-4.5 | 128K | 200K | 64% of native |
 | claude-sonnet-4.6 | 128K | 200K | 64% of native |
+| claude-opus-4.6 | 128K | 200K | 64% of native |
+| gemini-3.1-pro-preview | 128K | 400K | 32% of native |
+| gpt-5-mini | 128K | 400K | 32% of native |
+| gemini-3-flash-preview | 128K | 1M | 13% of native |
+| gpt-4o | 64K | 128K | 50% of native |
 
-Full sweep results will populate here as they run.
+Most current rejections now return the exact enforced ceiling in the error body, which makes the latest Copilot results exact instead of binary-search estimates.

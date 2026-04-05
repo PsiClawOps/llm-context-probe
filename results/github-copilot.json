@@ -1,15 +1,111 @@
 [
   {
     "provider": "github-copilot",
+    "model": "claude-haiku-4.5",
+    "probedLimit": 128000,
+    "vendorLimit": 200000,
+    "delta": -72000,
+    "pct": 64,
+    "method": "error-message",
+    "probeCount": 7,
+    "probedAt": "2026-04-04",
+    "note": "exact limit returned in 400 error message; GitHub Copilot enforces 128K prompt tokens on Haiku 4.5"
+  },
+  {
+    "provider": "github-copilot",
+    "model": "claude-sonnet-4.6",
+    "probedLimit": 128000,
+    "vendorLimit": 200000,
+    "delta": -72000,
+    "pct": 64,
+    "method": "error-message",
+    "probeCount": 6,
+    "probedAt": "2026-04-04",
+    "note": "exact limit returned in 400 error message; GitHub Copilot enforces 128K prompt tokens on Sonnet 4.6"
+  },
+  {
+    "provider": "github-copilot",
+    "model": "claude-opus-4.6",
+    "probedLimit": 128000,
+    "vendorLimit": 200000,
+    "delta": -72000,
+    "pct": 64,
+    "method": "error-message",
+    "probeCount": 6,
+    "probedAt": "2026-04-04",
+    "note": "exact limit returned in 400 error message; GitHub Copilot enforces 128K prompt tokens on Opus 4.6"
+  },
+  {
+    "provider": "github-copilot",
     "model": "gpt-5.4",
-    "probedLimit": 193812,
+    "probedLimit": 272000,
     "vendorLimit": 400000,
-    "delta": -206188,
-    "pct": 48,
-    "method": "binary-search",
-    "probeCount": 15,
-    "probedAt": "2026-04-03",
-    "note": "binary search converged ≤194K; vendor native is 400K — proxy enforces ~48% of native"
+    "delta": -128000,
+    "pct": 68,
+    "method": "error-message",
+    "probeCount": 7,
+    "probedAt": "2026-04-04",
+    "note": "exact limit returned in 400 error message; re-probe raised prior ~194K binary-search estimate to an exact 272K cap"
+  },
+  {
+    "provider": "github-copilot",
+    "model": "gpt-5.3-codex",
+    "probedLimit": 272000,
+    "vendorLimit": 400000,
+    "delta": -128000,
+    "pct": 68,
+    "method": "error-message",
+    "probeCount": 7,
+    "probedAt": "2026-04-04",
+    "note": "exact limit returned in 400 error message; GitHub Copilot enforces 272K prompt tokens on GPT-5.3-Codex"
+  },
+  {
+    "provider": "github-copilot",
+    "model": "gpt-5.4-mini",
+    "probedLimit": 272000,
+    "vendorLimit": 400000,
+    "delta": -128000,
+    "pct": 68,
+    "method": "error-message",
+    "probeCount": 7,
+    "probedAt": "2026-04-04",
+    "note": "exact limit returned in 400 error message after extending probe timeout; GitHub Copilot enforces 272K prompt tokens on GPT-5.4-mini"
+  },
+  {
+    "provider": "github-copilot",
+    "model": "gemini-3.1-pro-preview",
+    "probedLimit": 128000,
+    "vendorLimit": 400000,
+    "delta": -272000,
+    "pct": 32,
+    "method": "error-message",
+    "probeCount": 6,
+    "probedAt": "2026-04-04",
+    "note": "exact limit returned in 400 error message after extending probe timeout; GitHub Copilot enforces 128K prompt tokens on Gemini 3.1 Pro Preview"
+  },
+  {
+    "provider": "github-copilot",
+    "model": "gemini-3-flash-preview",
+    "probedLimit": 128000,
+    "vendorLimit": 1000000,
+    "delta": -872000,
+    "pct": 13,
+    "method": "error-message",
+    "probeCount": 6,
+    "probedAt": "2026-04-04",
+    "note": "exact limit returned in 400 error message; GitHub Copilot enforces 128K prompt tokens on Gemini 3 Flash Preview despite a 1M native window"
+  },
+  {
+    "provider": "github-copilot",
+    "model": "gpt-5-mini",
+    "probedLimit": 128000,
+    "vendorLimit": 400000,
+    "delta": -272000,
+    "pct": 32,
+    "method": "error-message",
+    "probeCount": 6,
+    "probedAt": "2026-04-04",
+    "note": "exact limit returned in 400 error message; GitHub Copilot enforces 128K prompt tokens on GPT-5-mini"
   },
   {
     "provider": "github-copilot",
@@ -21,30 +117,6 @@
     "method": "error-message",
     "probeCount": 5,
     "probedAt": "2026-04-03",
-    "note": "exact limit returned in 400 error message; vendor native is 128K — proxy enforces exactly 50%"
-  },
-  {
-    "provider": "github-copilot",
-    "model": "claude-opus-4-6",
-    "probedLimit": 126171,
-    "vendorLimit": 200000,
-    "delta": -73829,
-    "pct": 63,
-    "method": "binary-search",
-    "probeCount": 12,
-    "probedAt": "2026-04-03",
-    "note": "binary search converged ≤127K; vendor native is 200K (1M with beta header) — proxy enforces ~63% of native"
-  },
-  {
-    "provider": "github-copilot",
-    "model": "claude-sonnet-4-6",
-    "probedLimit": 128000,
-    "vendorLimit": 200000,
-    "delta": -72000,
-    "pct": 64,
-    "method": "error-message",
-    "probeCount": 6,
-    "probedAt": "2026-04-03",
-    "note": "exact limit returned in 400 error message; vendor native is 200K (1M with beta header) — proxy enforces exactly 128K"
+    "note": "exact limit returned in 400 error message; vendor native is 128K — GitHub Copilot enforces exactly 50%"
   }
 ]
